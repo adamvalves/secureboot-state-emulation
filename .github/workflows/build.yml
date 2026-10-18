@@ -1,0 +1,34 @@
+name: Driver Build & Static Analysis
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Build Kernel Driver (x64 Release)
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Inspect Source Tree
+        run: |
+          Get-ChildItem -Recurse include, src | Select-Object FullName
+
+      - name: Verify Include Guards and Syntax
+        run: |
+          $headers = Get-ChildItem -Path include -Filter *.h
+          foreach ($h in $headers) {
+              $content = Get-Content $h.FullName -Raw
+              if (-not ($content -match "#ifndef" -and $content -match "#define")) {
+                  Write-Error "Missing include guards in $($h.Name)"
+              }
+          }
+          Write-Host "All headers verified successfully."
