@@ -1,0 +1,44 @@
+# Visual Studio & Windows Driver Kit (WDK)
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.db
+*.opendb
+
+# Build outputs
+x64/
+x86/
+ARM64/
+Debug/
+Release/
+bin/
+obj/
+*.sys
+*.exe
+*.dll
+*.lib
+*.exp
+*.pdb
+*.ilk
+*.log
+*.tlog
+*.lastcodeanalysissucceeded
+*.recipe
+
+# Package / Driver certification
+*.cer
+*.cat
+*.inf.intermediate
+package/
+
+# Editor & OS artifacts
+.vscode/
+.idea/
+*.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+*.bak
+*.swp
