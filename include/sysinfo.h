@@ -1,0 +1,18 @@
+#ifndef SECUREBOOT_SYSINFO_H
+#define SECUREBOOT_SYSINFO_H
+
+#include "common.h"
+
+#define SECUREBOOT_FLAG_ENABLED (1 << 0) // Bit 0: SecureBootEnabled
+#define SECUREBOOT_FLAG_CAPABLE (1 << 3) // Bit 3: SecureBootCapable
+#define SECUREBOOT_FLAG_MASK    (SECUREBOOT_FLAG_ENABLED | SECUREBOOT_FLAG_CAPABLE)
+
+typedef struct _SYSTEM_SECUREBOOT_INFORMATION {
+    BOOLEAN SecureBootEnabled;
+    BOOLEAN SecureBootCapable;
+} SYSTEM_SECUREBOOT_INFORMATION, *PSYSTEM_SECUREBOOT_INFORMATION;
+
+NTSTATUS SysInfoPatchInitialize(VOID);
+BOOLEAN SysInfoIsAlreadyPatched(VOID);
+
+#endif // SECUREBOOT_SYSINFO_H
